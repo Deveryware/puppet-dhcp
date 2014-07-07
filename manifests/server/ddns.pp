@@ -7,6 +7,8 @@ define dhcp::server::ddns ($dnsupdatekey,
   $config = "/etc/dhcp/dhcpd.conf.ddns"
   $include = "include[. = '${config}']"
 
+# Create a file to update the DNS entries of static leases. 
+# The file contains each zones to update by the DHCP server
   file { $config:
     ensure  => $ensure,
     owner   => root,
@@ -16,6 +18,7 @@ define dhcp::server::ddns ($dnsupdatekey,
     notify  => Class['dhcp::server::service']
   }
 
+# Include the dynamic dns file in dhcpd.conf.
   augeas { "include-${name}.conf":
     context => $context,
     changes => "set ${include} ${config}",
