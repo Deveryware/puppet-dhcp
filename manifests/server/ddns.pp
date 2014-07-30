@@ -1,3 +1,36 @@
+# === Define Resource Type: dhcp::server::ddns
+#
+# This type will create the file to update the DNS entries of static leases.
+# The file contains each zones to update by the DHCP server
+#
+# === Parameters
+#
+# [*dnsupdatekey*]
+# The key name allowed to update DNS Zones
+#
+# [*dnsupdatekeylocation*]
+# The key location
+#
+# [*dnsupdatezones*]
+# DNS Zones to update
+#
+# [*nameservers*]
+# Nameservers in DNS Zones
+#
+# === Examples
+#
+# include "/etc/bind/rndc.key";
+#
+# zone dw.com. {
+#     primary 192.168.33.14;
+#     key rndc.key;
+# }
+#
+# zone 33.168.192.in-addr.arpa. {
+#     primary 192.168.33.14;
+#     key rndc.key;
+# }
+#
 define dhcp::server::ddns ($dnsupdatekey,
                            $dnsupdatekeylocation,
                            $dnsupdatezones,
